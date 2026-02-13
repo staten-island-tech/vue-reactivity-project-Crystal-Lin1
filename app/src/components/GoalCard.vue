@@ -5,7 +5,6 @@
        <h2>{{ goal.status }}</h2>
         <p class="italic">{{ goal.description }}</p>
       <button>Delete</button>
-   
     </div>
 </template>
 
