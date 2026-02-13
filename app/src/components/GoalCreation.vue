@@ -1,22 +1,27 @@
 <template>
     <div>
-        <h1>Goal Creation</h1>
+        <div class="flex flex-col items-center border-2 bg-gray-100 p-5 rounded-lg w-4/12 z-3 m-auto mt-5">
+        <div class="relative w-full">
+            <h1 class="font-bold text-center">Goal Creation</h1>
+            <button class="absolute right-0 top-0 font-bold">X</button>
+        </div>
         <form @submit.prevent="addGoal(formData)">
-            <input type="text" placeholder="Goal Title" v-model="formData.name"/>
-            <h2>Status:</h2>
-            <select v-model="formData.status">
+            <input class='rounded-lg my-2 p-1' type="text" placeholder="Goal Title" v-model="formData.name"/>
+            <h2 class="my-3">Status:</h2>
+            <select class='rounded-lg' v-model="formData.status">
                 <option value="not-started">Not Started</option>
                 <option value="in-progress">In Progress</option>
                 <option value="completed">Completed</option>
             </select>
-            <h2>Timeline:</h2>
-            <select v-model="formData.timeline">
+            <h2 class="my-3">Timeline:</h2>
+            <select class='rounded-lg' v-model="formData.timeline">
                 <option value="long-term">Long Term</option>
                 <option value="medium-term">Medium Term</option>
                 <option value="short-term">Short Term</option>
             </select>
-            <button type="submit">Create Goal</button>
+            <button class='block hover:bg-blue-200 text-blue-500 mt-2 m-auto w-7/12 p-2 rounded-lg bg-white border-2 border-blue-500'type="submit">Create Goal</button>
         </form>
+        </div>
         <!--broken bc the goal stuff isnt made yet-->
     </div>
 </template>
