@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-    import { reactive, ref} from 'vue';
+    import { reactive} from 'vue';
 
     const emits = defineEmits(['close', 'goalsArray', 'invalidForm'])
     const formData = reactive(
