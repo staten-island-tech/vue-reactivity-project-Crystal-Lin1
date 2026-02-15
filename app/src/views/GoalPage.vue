@@ -6,10 +6,11 @@
     <main > 
         <div class="flex justify-end">
             <button class='mr-1 text-xl text-white font-bold hover:bg-blue-700 bg-blue-400 rounded-lg block mt-5 h-10 w-30 px-3 '@click="displayGoalsForm">+ Create Goal</button>
-            <button class='mr-1 text-xl text-white font-bold hover:bg-blue-700 bg-blue-400 rounded-lg block mt-5 h-10 w-30 px-3'>🖉 Edit Goals</button>        
+            <!-- <button class='mr-1 text-xl text-white font-bold hover:bg-blue-700 bg-blue-400 rounded-lg block mt-5 h-10 w-30 px-3'>🖉 Edit Goals</button>         -->
         </div>
     
-    <GoalCreation @goals-array='getGoalsArrayEmit' v-if="showGoalsForm" @close="showGoalsForm = false" />
+    <GoalCreation @invalidForm='invalidForm = true' @goalsArray='getGoalsArrayEmit' v-if="showGoalsForm" @close="showGoalsForm = false" />
+    <CreationError @close='invalidForm = false' v-if="invalidForm"/>
     <section class="flex flex-wrap justify-center">
         <GoalCard @delete-goal='deleteGoal' v-for="goal in goalsArray" :key="goal.id" :goal="goal" /> 
     </section>
@@ -21,7 +22,9 @@
 import GoalCard from '../components/GoalCard.vue'
 import { ref} from 'vue';
 import GoalCreation from '../components/GoalCreation.vue';
+import CreationError from '../components/CreationError.vue';
 
+let invalidForm = ref(false)
 let goalsArray = ref([])
 
 const showGoalsForm = ref(false)

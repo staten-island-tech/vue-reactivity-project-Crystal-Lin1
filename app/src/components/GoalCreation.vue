@@ -29,9 +29,9 @@
 </template>
 
 <script setup>
-    import { reactive} from 'vue';
-    const emits = defineEmits(['close', 'goalsArray'])
-    
+    import { reactive, ref} from 'vue';
+
+    const emits = defineEmits(['close', 'goalsArray', 'invalidForm'])
     const formData = reactive(
         {
             'name': '',
@@ -40,8 +40,15 @@
             'description': ''
         }
     );
-  
+    function invalidiateForm(formData) {
+        if (formData.name === '' || formData.status === '' || formData.timeline === '' || formData.description === '') {
+            emits('invalidForm')
+            emits('close')
+            return true;
+        }
+    }
     function submitForm() {
+        if (invalidiateForm(formData)) return;
         emits('goalsArray', formData)
         emits('close')
         formData.value = {
