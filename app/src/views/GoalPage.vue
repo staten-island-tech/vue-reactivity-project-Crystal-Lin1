@@ -6,7 +6,6 @@
     <main > 
         <div class="flex justify-end">
             <button class='mr-1 text-xl text-white font-bold hover:bg-blue-700 bg-blue-400 rounded-lg block mt-5 h-10 w-30 px-3 '@click="displayGoalsForm">+ Create Goal</button>
-            <!-- <button class='mr-1 text-xl text-white font-bold hover:bg-blue-700 bg-blue-400 rounded-lg block mt-5 h-10 w-30 px-3'>🖉 Edit Goals</button>         -->
         </div>
     
     <GoalCreation @invalidForm='invalidForm = true' @goalsArray='getGoalsArrayEmit' v-if="showGoalsForm" @close="showGoalsForm = false" />

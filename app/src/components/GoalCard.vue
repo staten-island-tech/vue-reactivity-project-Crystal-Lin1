@@ -4,7 +4,11 @@
        <p class="italic mt-10">Description: {{ goal.description }}</p>
        <h2 class="mt-10">{{ toTitleCase(goal.status.replace(/-/g, ' '))}}</h2>
        <h2>{{ toTitleCase(goal.timeline.replace(/-/g, ' ')) }}</h2>
-      <button @click="$emit('deleteGoal')" class="hover:bg-red-700 my-2 bg-red-600 rounded-lg font-bold text-white p-2">Delete</button>
+        <div class="flex justify-center flex-col">
+            <button @click="$emit('deleteGoal')" class="hover:bg-red-700 my-2 bg-red-600 rounded-lg font-bold text-white p-2 w-6/12 mx-auto">Delete</button>
+            <button @click="$emit('editGoal')" class=" my-2 bg-blue-600 rounded-lg font-bold text-white p-2 w-6/12 mx-auto">Edit</button>
+        </div>
+      
     </div>
 </template>
 
@@ -14,7 +18,8 @@ const props = defineProps({
         type: Object,
         required: true
     }})
-const emits = defineEmits(['deleteGoal'])
+const emits = defineEmits(['deleteGoal', 'editGoal'])
+
 function toTitleCase(str){
     return str
         .toLowerCase()
