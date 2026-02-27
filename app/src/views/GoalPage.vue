@@ -11,8 +11,9 @@
     <GoalCreation @invalidForm='invalidForm = true' @goalsArray='getGoalsArrayEmit' v-if="showGoalsForm" @close="showGoalsForm = false" />
     <CreationError @close='invalidForm = false' v-if="invalidForm"/>
     <section class="flex flex-wrap justify-center">
-        <GoalCard @delete-goal='deleteGoal' v-for="goal in goalsArray" :key="goal.id" :goal="goal" /> 
+        <GoalCard @delete-goal='deleteGoal' @edit-goal='goalEdit = true' v-for="goal in goalsArray" :key="goal.id" :goal="goal" /> 
     </section>
+        <GoalEdit @updated-goal='getupdatedGoal' @close="goalEdit = false" v-if="goalEdit"></GoalEdit>
     </main>
     </div>
 </template>
@@ -22,10 +23,11 @@ import GoalCard from '../components/GoalCard.vue'
 import { ref} from 'vue';
 import GoalCreation from '../components/GoalCreation.vue';
 import CreationError from '../components/CreationError.vue';
+import GoalEdit from '../components/GoalEdit.vue';
 
 let invalidForm = ref(false)
 let goalsArray = ref([])
-
+let goalEdit = ref(false)
 const showGoalsForm = ref(false)
 function displayGoalsForm() {
     showGoalsForm.value = true;
@@ -38,6 +40,10 @@ function getGoalsArrayEmit(obj) {
     //never called
     goalsArray.value.push({...obj})
     console.log(goalsArray.value)
+}
+function getupdatedGoal(obj) {
+    let updatedGoal = obj
+        
 }
 </script>
 
