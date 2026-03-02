@@ -24,10 +24,15 @@ import { ref} from 'vue';
 import GoalCreation from '../components/GoalCreation.vue';
 import CreationError from '../components/CreationError.vue';
 import GoalEdit from '../components/GoalEdit.vue';
-
+import goalsArray from '../store.js'
 let invalidForm = ref(false)
-let goalsArray = ref([])
+
 let goalEdit = ref(false)
+const formData = {'name': '',
+            'status': '',
+            'timeline': '',
+            'description': ''}
+        
 const showGoalsForm = ref(false)
 function displayGoalsForm() {
     showGoalsForm.value = true;
@@ -37,10 +42,10 @@ function deleteGoal(goalToDelete) {
 }
 
 function getGoalsArrayEmit(obj) {
-    //never called
     goalsArray.value.push({...obj})
     console.log(goalsArray.value)
 }
+
 function getupdatedGoal(obj) {
     let updatedGoal = obj
         
