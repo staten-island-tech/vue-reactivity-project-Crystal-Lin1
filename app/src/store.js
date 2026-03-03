@@ -1,13 +1,11 @@
-import {reactive} from 'vue'
+import {ref} from 'vue'
 
-export const goalsArray = reactive({
-    array: {
+export const goalsArray = ref([
+    {
             'name': '',
             'status': '',
             'timeline': '',
             'description': ''
         },
-    createGoal(formData) {
-        goalsArray = {...formData}
-    }
-})
+
+]   )

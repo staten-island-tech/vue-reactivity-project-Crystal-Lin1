@@ -11,9 +11,9 @@
     <GoalCreation @invalidForm='invalidForm = true' @goalsArray='getGoalsArrayEmit' v-if="showGoalsForm" @close="showGoalsForm = false" />
     <CreationError @close='invalidForm = false' v-if="invalidForm"/>
     <section class="flex flex-wrap justify-center">
-        <GoalCard @delete-goal='deleteGoal' @edit-goal='goalEdit = true' v-for="goal in goalsArray" :key="goal.id" :goal="goal" /> 
+        <GoalCard @delete-goal='deleteGoal' @edit-goal='selectEditedGoal' v-for="goal in goalsArray" :key="goal.id" :goal="goal" /> 
     </section>
-        <GoalEdit @updated-goal='getupdatedGoal' @close="goalEdit = false" v-if="goalEdit"></GoalEdit>
+        <GoalEdit @updated-goal='getupdatedGoal' @close="goalEdit = false" v-if="goalEdit" :goal="selectedGoal"></GoalEdit>
     </main>
     </div>
 </template>
@@ -24,10 +24,15 @@ import { ref} from 'vue';
 import GoalCreation from '../components/GoalCreation.vue';
 import CreationError from '../components/CreationError.vue';
 import GoalEdit from '../components/GoalEdit.vue';
-import goalsArray from '../store.js'
+import { goalsArray } from '../store.js'
 let invalidForm = ref(false)
 
 let goalEdit = ref(false)
+let selectedGoal = ref()
+function selectEditedGoal(goal) {
+    goalEdit = true
+    selectedGoal = goal;
+}
 const formData = {'name': '',
             'status': '',
             'timeline': '',
