@@ -29,7 +29,7 @@
 
 <script setup>
     import { reactive} from 'vue';
-    const emits = defineEmits(['close'])
+    const emits = defineEmits(['close', 'updatedGoal'])
     const props = defineProps({
     goal: {
         type: Object,
@@ -45,9 +45,9 @@
         }
     );
     function submitForm() {
-        emits('updatedGoal', formData)
+        emits('updatedGoal', {...formData})
         emits('close')
-        formData.value = {
+        formData = {
             name: '',
             status: '',
             timeline: ''

@@ -6,7 +6,7 @@
        <h2>{{ toTitleCase(goal.timeline.replace(/-/g, ' ')) }}</h2>
         <div class="flex justify-center flex-col">
             <button @click="$emit('deleteGoal')" class="hover:bg-red-700 my-2 bg-red-600 rounded-lg font-bold text-white p-2 w-6/12 mx-auto">Delete</button>
-            <button @click="$emit('editGoal')" class=" my-2 bg-blue-600 rounded-lg font-bold text-white p-2 w-6/12 mx-auto">Edit</button>
+            <button @click="allowGoalEdit" class=" my-2 bg-blue-600 rounded-lg font-bold text-white p-2 w-6/12 mx-auto">Edit</button>
         </div>
       
     </div>
@@ -19,7 +19,9 @@ const props = defineProps({
         required: true
     }})
 const emits = defineEmits(['deleteGoal', 'editGoal'])
-
+function allowGoalEdit() {
+    emits('editGoal', props.goal)
+}
 function toTitleCase(str){
     return str
         .toLowerCase()

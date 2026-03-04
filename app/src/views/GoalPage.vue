@@ -13,7 +13,7 @@
     <section class="flex flex-wrap justify-center">
         <GoalCard @delete-goal='deleteGoal' @edit-goal='selectEditedGoal' v-for="goal in goalsArray" :key="goal.id" :goal="goal" /> 
     </section>
-        <GoalEdit @updated-goal='getupdatedGoal' @close="goalEdit = false" v-if="goalEdit" :goal="selectedGoal"></GoalEdit>
+        <GoalEdit @updated-goal='getupdatedGoal' @close="goalEdit = false" v-if="goalEdit" ::goal="selectedGoal"/>
     </main>
     </div>
 </template>
@@ -28,10 +28,12 @@ import { goalsArray } from '../store.js'
 let invalidForm = ref(false)
 
 let goalEdit = ref(false)
-let selectedGoal = ref()
+let selectedGoal = ref(null)
 function selectEditedGoal(goal) {
-    goalEdit = true
-    selectedGoal = goal;
+    goalEdit.value = true
+    selectedGoal.value = goal;
+    console.log(selectedGoal.value)
+    //when you call this function everything breaks
 }
 const formData = {'name': '',
             'status': '',
