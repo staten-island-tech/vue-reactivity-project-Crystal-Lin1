@@ -13,7 +13,7 @@
     <section class="flex flex-wrap justify-center">
         <GoalCard @delete-goal='deleteGoal' @edit-goal='selectEditedGoal' v-for="goal in goalsArray" :key="goal.id" :goal="goal" /> 
     </section>
-        <GoalEdit @updated-goal='getupdatedGoal' @close="goalEdit = false" v-if="goalEdit" ::goal="selectedGoal"/>
+        <GoalEdit @updated-goal='getupdatedGoal' @close="goalEdit = false" v-if="goalEdit" :goal="selectedGoal"/>
     </main>
     </div>
 </template>
@@ -35,11 +35,7 @@ function selectEditedGoal(goal) {
     console.log(selectedGoal.value)
     //when you call this function everything breaks
 }
-const formData = {'name': '',
-            'status': '',
-            'timeline': '',
-            'description': ''}
-        
+
 const showGoalsForm = ref(false)
 function displayGoalsForm() {
     showGoalsForm.value = true;
@@ -49,13 +45,16 @@ function deleteGoal(goalToDelete) {
 }
 
 function getGoalsArrayEmit(obj) {
+    if (!obj.id) {
+        obj.id = Date.now() 
+    }
     goalsArray.value.push({...obj})
-    console.log(goalsArray.value)
 }
 
-function getupdatedGoal(obj) {
-    let updatedGoal = obj
-        
+function getupdatedGoal(updatedGoal) {
+    const index = goalsArray.value.findIndex(g => g.id === updatedGoal.id)
+    goalsArray.value[index] = updatedGoal
+    goalEdit.value = false 
 }
 </script>
 
